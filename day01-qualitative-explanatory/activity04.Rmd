@@ -6,3 +6,41 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Loading Packages 
+```{r, warning= FALSE} 
+library(tidyverse) 
+library(tidymodels) 
+``` 
+# Loading GGally 
+```{r}
+library(GGally) 
+``` 
+# Loading the dataset from the URL 
+```{r} 
+evals <- readr::read_tsv("https://www.openintro.org/data/tab-delimited/evals.txt") 
+evals
+``` 
+```{r}
+m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
+tidy(m_bty_gen)
+```
+
+# Day 2 
+## Task 2 Interactions
+
+```{r}
+m_int <- lm(score ~ bty_avg * gender, data = evals)
+tidy(m_int)
+```
+
+```{r}
+m_int <- lm(score ~ bty_avg * rank, data = evals)
+tidy(m_int)
+```
+
+```{r}
+m_int <- lm(score ~ bty_avg + gender + bty_avg * gender, data = evals)
+tidy(m_int)
+```
+
